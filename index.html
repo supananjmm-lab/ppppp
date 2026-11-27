@@ -1,0 +1,1017 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f5f2">
+  <title>Imagine City — คืนสุดท้ายก่อนสีจะหายไป</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app" class="shell">
+    <main>
+      <section id="intro" class="screen active" aria-labelledby="intro-title">
+        <div class="intro-grid">
+          <h1 id="intro-title"><span class="english">Imagine City</span><span class="thai-title">คืนสุดท้ายก่อนสีจะหายไป</span></h1>
+          <figure class="city-art">
+            <img src="assets/เมืองไร้สีหน้าแรก.png" alt="ภาพเมืองสีเทาในคืนพระจันทร์เต็มดวง ก่อนสีสันจะหายไป" decoding="async">
+          </figure>
+          <p class="intro-copy">
+            เมืองที่เคยเต็มไปด้วยสีสันกำลังจะกลายเป็นสีเทา เหลือเวลาอีกเพียงหนึ่งคืน
+            ดวงไฟดวงเล็กกำลังรอให้เธอออกเดินทาง เพื่อช่วยเมืองนี้ในแบบของเธอ
+          </p>
+          <div class="intro-actions">
+            <button id="start-button" class="primary" type="button">เริ่มออกเดินทาง <span aria-hidden="true">→</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section id="quiz" class="screen" aria-labelledby="question-title">
+        <div class="quiz-wrap">
+          <div class="quiz-top">
+            <button id="back-button" class="back-button" type="button" aria-label="ย้อนกลับ" title="ย้อนกลับ">←</button>
+            <div class="progress-track" role="progressbar" aria-label="ความคืบหน้าของเรื่องราว" aria-valuemin="0" aria-valuemax="11" aria-valuenow="1">
+              <div id="progress-fill" class="progress-fill"></div>
+            </div>
+          </div>
+          <aside class="quiz-aside">
+            <div class="quiz-art" aria-hidden="true">
+              <img id="question-image" src="assets/fire.png" alt="" decoding="async">
+              <svg viewBox="0 0 140 120" fill="none">
+                <path d="M17 101h106M28 101V69h19v32M53 101V48h25v53M84 101V65h18v36M107 101V39h13v62" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M61 60h4m-4 12h4m-4 12h4m44-36h3m-3 10h3m-3 10h3" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="92" cy="24" r="5" fill="currentColor"/>
+                <path d="M92 12V6m0 36v-6M80 24h-6m36 0h-6M84 16l-4-4m28 28-4-4m0-20 4-4M80 40l4-4" stroke="currentColor" stroke-width="1.3"/>
+              </svg>
+            </div>
+          </aside>
+          <div class="question-body">
+            <p id="scene-label" class="scene-label"></p>
+            <h2 id="question-title" class="question-title"></h2>
+            <p id="story-copy" class="story-copy"></p>
+            <div id="choices" class="choices" role="group" aria-labelledby="question-title"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="interlude" class="screen" aria-labelledby="story-title">
+        <div class="story-page">
+          <div class="story-art" aria-hidden="true">
+            <img id="interlude-image" src="assets/fire.png" alt="" decoding="async">
+            <svg viewBox="0 0 128 128" fill="none">
+              <path d="M20 101V69h18v32M45 101V47h24v54M76 101V60h17v41M100 101V37h11v64" stroke="currentColor" stroke-width="1.4"/>
+              <path d="M14 101h101M53 59h5m-5 11h5m-5 11h5m47-35h2m-2 10h2m-2 10h2" stroke="currentColor" stroke-width="1.4"/>
+              <circle cx="87" cy="23" r="4" fill="currentColor"/>
+              <path d="M87 13V8m0 30v-5M77 23h-5m30 0h-5M80 16l-4-4m23 23-4-4m0-15 4-4m-23 23 4-4" stroke="currentColor" stroke-width="1.2"/>
+            </svg>
+          </div>
+          <div class="story-content">
+            <h2 id="story-title" class="story-title"></h2>
+            <p id="interlude-copy" class="story-copy"></p>
+            <div class="story-actions">
+              <button id="story-continue" class="primary" type="button"><span id="story-continue-label">เดินทางต่อ</span> <span class="story-continue-arrow" aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="questionnaire" class="screen" aria-labelledby="questionnaire-title">
+        <div class="questionnaire-wrap">
+          <p class="eyebrow">แบบสอบถามข้อมูลผู้สนใจ</p>
+          <h2 id="questionnaire-title" class="questionnaire-title">บอกเราเกี่ยวกับตัวเธอ</h2>
+          <p class="questionnaire-intro">ตอบคำถามทุกข้อก่อนดูผลลัพธ์ ข้อมูลที่กรอกจะใช้ในหน้านี้เท่านั้น ไม่ถูกบันทึกหรือส่งออก</p>
+          <form id="interest-form" class="interest-form">
+            <div class="survey-grid">
+              <div class="survey-field">
+                <label class="survey-label" for="nickname">1. ชื่อเล่นของเธอ</label>
+                <input id="nickname" class="survey-control" name="nickname" type="text" maxlength="40" autocomplete="nickname" required>
+              </div>
+              <div class="survey-field">
+                <label class="survey-label" for="education-level">2. ตอนนี้เรียนอยู่ชั้นไหน</label>
+                <select id="education-level" class="survey-control" name="educationLevel" required>
+                  <option value="" selected disabled>เลือกชั้นเรียน</option>
+                  <option>ม.4</option>
+                  <option>ม.5</option>
+                  <option>ม.6</option>
+                  <option>ปวช.</option>
+                  <option>ปวส.</option>
+                  <option>อื่น ๆ</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label class="survey-label" for="study-stream">3. เรียนสายอะไรอยู่</label>
+                <select id="study-stream" class="survey-control" name="studyStream" required>
+                  <option value="" selected disabled>เลือกสายการเรียน</option>
+                  <option>ศิลป์-คำนวณ</option>
+                  <option>ศิลป์-ภาษา</option>
+                  <option>วิทย์-คณิต</option>
+                  <option>สายอาชีพ</option>
+                  <option>อื่น ๆ</option>
+                </select>
+              </div>
+              <div class="survey-field">
+                <label class="survey-label" for="province">4. อยู่จังหวัดอะไร</label>
+                <input id="province" class="survey-control" name="province" type="text" maxlength="60" autocomplete="address-level1" required>
+              </div>
+              <div class="survey-field survey-wide">
+                <label class="survey-label" for="discovery-source">5. รู้จักคณะนี้จากที่ไหน</label>
+                <select id="discovery-source" class="survey-control" name="discoverySource" required>
+                  <option value="" selected disabled>เลือกช่องทางที่รู้จัก</option>
+                  <option>Facebook</option>
+                  <option>Instagram</option>
+                  <option>TikTok</option>
+                  <option>เพื่อนหรือรุ่นพี่</option>
+                  <option>ครูแนะแนว</option>
+                  <option>งานกิจกรรม</option>
+                  <option>อื่น ๆ</option>
+                </select>
+              </div>
+              <fieldset class="survey-field survey-wide">
+                <legend class="survey-label">6. เลือกคณะโดยดูจากอะไรมากที่สุด <span>เลือก 2 ข้อ</span></legend>
+                <p id="factor-hint" class="survey-hint">เลือก 2 ข้อพอดี</p>
+                <div class="survey-options">
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ค่าเทอม"><span>ค่าเทอม</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ทุนการศึกษา"><span>ทุนการศึกษา</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ชื่อเสียงมหาวิทยาลัย"><span>ชื่อเสียงมหาวิทยาลัย</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="อาชีพหลังเรียนจบ"><span>อาชีพหลังเรียนจบ</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ผลงานของรุ่นพี่"><span>ผลงานของรุ่นพี่</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="การเดินทาง"><span>การเดินทาง</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ความชอบของตัวเอง"><span>ความชอบของตัวเอง</span></label>
+                  <label class="survey-option"><input type="checkbox" name="decisionFactors" value="ผู้ปกครองสนับสนุน"><span>ผู้ปกครองสนับสนุน</span></label>
+                </div>
+                <p id="factor-count" class="survey-count" aria-live="polite">เลือกแล้ว 0/2</p>
+              </fieldset>
+              <fieldset class="survey-field survey-wide">
+                <legend class="survey-label">7. ตอนนี้อยู่ขั้นไหนของการเลือกคณะ</legend>
+                <div class="survey-options">
+                  <label class="survey-option"><input type="radio" name="applicationStage" value="เพิ่งเริ่มหาข้อมูล" required><span>เพิ่งเริ่มหาข้อมูล</span></label>
+                  <label class="survey-option"><input type="radio" name="applicationStage" value="กำลังเปรียบเทียบหลายที่"><span>กำลังเปรียบเทียบหลายที่</span></label>
+                  <label class="survey-option"><input type="radio" name="applicationStage" value="ตั้งใจสมัครแล้ว"><span>ตั้งใจสมัครแล้ว</span></label>
+                  <label class="survey-option"><input type="radio" name="applicationStage" value="รอผลสอบที่อื่นก่อน"><span>รอผลสอบที่อื่นก่อน</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="survey-field survey-wide">
+                <legend class="survey-label">8. เคยทำงานสร้างสรรค์อะไรมาบ้าง <span>เลือกได้หลายข้อ</span></legend>
+                <p class="survey-hint">ถ้ายังไม่เคยทำ ให้เลือกข้อนั้นเพียงข้อเดียว</p>
+                <div class="survey-options">
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="วาดรูป"><span>วาดรูป</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="ออกแบบ"><span>ออกแบบ</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="ตัดต่อวิดีโอ"><span>ตัดต่อวิดีโอ</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="ทำเกม"><span>ทำเกม</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="จัดกิจกรรม"><span>จัดกิจกรรม</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="ถ่ายคอนเทนต์"><span>ถ่ายคอนเทนต์</span></label>
+                  <label class="survey-option"><input type="checkbox" name="creativeWorks" value="ยังไม่เคยเลย"><span>ยังไม่เคยเลย</span></label>
+                </div>
+              </fieldset>
+              <fieldset class="survey-field survey-wide">
+                <legend class="survey-label">9. อยากรับข่าวสารของคณะทางไหน</legend>
+                <div class="survey-options">
+                  <label class="survey-option"><input type="radio" name="newsChannel" value="LINE" required><span>LINE</span></label>
+                  <label class="survey-option"><input type="radio" name="newsChannel" value="อีเมล"><span>อีเมล</span></label>
+                  <label class="survey-option"><input type="radio" name="newsChannel" value="Facebook"><span>Facebook</span></label>
+                  <label class="survey-option"><input type="radio" name="newsChannel" value="Instagram"><span>Instagram</span></label>
+                  <label class="survey-option"><input type="radio" name="newsChannel" value="โทรศัพท์"><span>โทรศัพท์</span></label>
+                </div>
+              </fieldset>
+            </div>
+            <div class="questionnaire-actions">
+              <button id="skip-questionnaire" class="primary" type="button">ข้ามไปดูผลลัพธ์</button>
+              <button class="primary" type="submit">ส่งคำตอบและดูผลลัพธ์ <span aria-hidden="true">→</span></button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="result" class="screen" aria-labelledby="result-title">
+        <div class="result-wrap">
+          <p class="eyebrow">ในคืนที่สีสันกลับคืนมา เธอคือ…</p>
+          <p id="respondent-greeting" class="respondent-greeting" hidden></p>
+          <div class="result-top">
+            <div>
+              <h2 id="result-title" class="result-title"></h2>
+              <p id="result-program-codes" class="result-program-codes"></p>
+              <p id="result-summary" class="result-summary"></p>
+            </div>
+            <div id="result-characters" class="result-characters" aria-label="ตัวละครประจำสาย"></div>
+          </div>
+          <div class="result-columns">
+            <section class="result-section">
+              <h3>ย่านที่ดวงไฟพาไป</h3>
+              <div id="district-result" class="district-result"></div>
+            </section>
+            <section class="result-section">
+              <h3>อาชีพที่อาจใช่สำหรับเธอ</h3>
+              <ul id="career-list" class="career-list"></ul>
+            </section>
+          </div>
+          <div class="result-actions">
+            <p>ไม่มีเส้นทางไหนผิด ลองสำรวจสิ่งที่ทำให้เธออยากสร้างต่อไป</p>
+            <div class="result-action-buttons">
+              <button id="save-result-image" class="primary" type="button">บันทึกภาพ</button>
+              <button id="restart-button" class="primary" type="button">เริ่มเรื่องราวใหม่ ↻</button>
+            </div>
+          </div>
+          <p id="result-image-status" class="result-image-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </main>
+
+  </div>
+
+  <script>
+    const categories = {
+      design: {
+        name: "นักออกแบบประจำเมือง", code: "DGD", district: "ย่านดีไซน์ · ถนนแบรนด์",
+        description: "เธอมองเห็นว่าภาพและรายละเอียดเล็ก ๆ จะทำให้เมืองสื่อสารกับผู้คนได้ชัดขึ้น",
+        image: "assets/result-design.png",
+        careers: ["นักออกแบบกราฟิก", "นักออกแบบแบรนด์", "นักออกแบบ UI/UX", "นักออกแบบบรรจุภัณฑ์", "Art Director"]
+      },
+      art: {
+        name: "นักเสกจินตนาการ", code: "DGA", district: "ย่านศิลป์ · ตรอกจินตนาการ",
+        description: "เธอชอบสร้างภาพ ตัวละคร และโลกที่คนอื่นจินตนาการตามได้",
+        image: "assets/result-art.png",
+        careers: ["Character Designer", "Concept Artist", "นักวาดภาพประกอบ", "Storyboard Artist", "นักทำ Art Toy"]
+      },
+      fx: {
+        name: "นักปั้นภาพให้มีชีวิต", code: "AFX", district: "ย่านภาพยนตร์ · สตูดิโอหลังม่าน",
+        description: "เธอสนุกกับการทำให้ภาพเคลื่อนไหว และทำสิ่งที่ดูเป็นไปไม่ได้ให้กลายเป็นจริง",
+        image: "assets/result-film.png",
+        careers: ["3D Animator", "3D Modeler", "VFX Artist", "Compositor", "Rigging Artist"]
+      },
+      game: {
+        name: "นักสร้างสนามเล่น", code: "IGD", district: "ย่านเกม · สนามแห่งการเล่น",
+        description: "เธอคิดถึงกติกา ประสบการณ์ และโลกที่คนอื่นเข้ามามีส่วนร่วมได้",
+        image: "assets/result-game.png",
+        careers: ["Game Designer", "Level Designer", "Game Artist", "Game Producer", "นักออกแบบเกม VR/AR"]
+      },
+      event: {
+        name: "นักรวมใจคนทั้งเมือง", code: "DEN", district: "ย่านบันเทิง · ลานเวที",
+        description: "เธอมีพลังในการเล่าเรื่อง ชวนคนมาร่วมสนุก และสร้างประสบการณ์ร่วมกัน",
+        image: "assets/result-event.png",
+        careers: ["Content Creator", "นักเขียนบท", "Event Producer", "Streamer / VTuber", "Community Manager"]
+      }
+    };
+
+    const questions = [
+      {
+        scene: "ฉาก 1.1 · ตื่นขึ้นมา",
+        title: "สิ่งแรกที่เธอทำคือ…",
+        story: "ดวงไฟลอยมาใกล้ ๆ แล้วกระซิบว่า “เหลือเวลาแค่คืนนี้นะ ช่วยเมืองนี้ด้วย”",
+        choices: [
+          ["art", "หยิบชอล์กขึ้นมาวาดสีบนกำแพง"],
+          ["design", "จัดป้ายที่ตัวอักษรซีดให้อ่านง่ายขึ้น"],
+          ["game", "ถามดวงไฟว่าเมืองนี้มีกติกาอะไร"],
+          ["fx", "ลองขยับของรอบตัว ดูว่าทำไมทุกอย่างถึงนิ่งสนิท"],
+          ["event", "เรียกคนในเมืองมารวมกันที่จัตุรัส"]
+        ]
+      },
+      {
+        scene: "ฉาก 1.2 · ของติดตัว",
+        title: "พกของไปได้แค่ชิ้นเดียว เธอเลือก…",
+        story: "ดวงไฟบอกว่าของชิ้นนั้นอาจช่วยเธอได้ตลอดการเดินทาง",
+        choices: [
+          ["art", "สมุดสเก็ตช์ที่วาดได้ไม่รู้จบ"],
+          ["design", "ชุดสีและตัวอักษรวิเศษที่ทำให้ทุกอย่างดูลงตัว"],
+          ["game", "ตลับเกมเก่าที่ยังไม่มีใครรู้วิธีเล่น"],
+          ["fx", "กล้องฟิล์มที่ภาพถ่ายเคลื่อนไหวได้"],
+          ["event", "ไมโครโฟนที่เสียงดังไปทั่วทั้งเมือง"]
+        ]
+      },
+      {
+        scene: "ฉาก 1.3 · ทางแยกห้าสาย",
+        title: "เธอจะเดินเข้าถนนสายไหนก่อน?",
+        story: "แต่ละสายมีกลิ่นและเสียงไม่เหมือนกัน เมืองกำลังรอให้เธอเลือกเส้นทาง",
+        choices: [
+          ["art", "ถนนที่ผนังทั้งสองข้างเต็มไปด้วยภาพวาด"],
+          ["design", "ถนนที่ป้ายและหน้าต่างจัดวางอย่างเป็นระเบียบ"],
+          ["game", "ถนนที่มีเสียงดนตรีและแสงจากตู้เกมเก่า"],
+          ["fx", "ถนนที่มีโรงถ่ายและฉากจำลองอยู่ปลายทาง"],
+          ["event", "ถนนที่เสียงผู้คนดังมาจากลานกิจกรรม"]
+        ]
+      },
+      {
+        scene: "ฉาก 2.1 · สะพานที่พังครึ่งหนึ่ง",
+        title: "สะพานข้ามแม่น้ำพังไปครึ่งทาง เธอจะ…",
+        story: "อีกฝั่งมีคนกำลังรอความช่วยเหลือ แต่เส้นทางข้ามแม่น้ำขาดหายไป",
+        choices: [
+          ["art", "วาดสะพานขึ้นมาใหม่ด้วยเส้นและสีในแบบของเธอ"],
+          ["design", "ทำป้ายเตือนและป้ายทางอ้อมให้ทุกคนเดินตามได้"],
+          ["game", "แก้กลไกของสะพานให้กลับมาทำงานอีกครั้ง"],
+          ["fx", "ทำภาพสะพานค่อย ๆ ประกอบตัวเองให้ทุกคนเห็น"],
+          ["event", "ชวนชาวเมืองมาช่วยกันซ่อม แล้วจัดเป็นงานฉลองเล็ก ๆ"]
+        ]
+      },
+      {
+        scene: "ฉาก 2.2 · เด็กน้อยร้องไห้",
+        title: "ตัวการ์ตูนที่เด็กคนหนึ่งรักหายไป เธอช่วยยังไง?",
+        story: "เด็กน้อยนั่งร้องไห้อยู่ข้างทาง บอกว่าตัวการ์ตูนตัวโปรดหายไปจากเมืองแล้ว",
+        choices: [
+          ["art", "วาดตัวการ์ตูนตัวนั้นขึ้นมาใหม่ให้"],
+          ["design", "ทำสติกเกอร์ โปสเตอร์ และของที่ระลึกให้เก็บไว้"],
+          ["game", "สร้างเกมเล็ก ๆ ให้เด็กได้เล่นกับตัวการ์ตูน"],
+          ["fx", "ทำให้ตัวการ์ตูนมีชีวิตขึ้นมา เดินและพูดได้"],
+          ["event", "ชวนเด็กคนอื่นมาล้อมวงฟังเรื่องของตัวการ์ตูน"]
+        ]
+      },
+      {
+        scene: "ฉาก 2.3 · ร้านเก่าแก่ใกล้ปิด",
+        title: "เจ้าของร้านบอกว่าไม่มีใครรู้จักร้านเขาแล้ว เธอตอบว่า…",
+        story: "ร้านเก่าแก่กำลังจะปิด เธอจะช่วยให้ผู้คนกลับมาจดจำร้านนี้ได้อย่างไร?",
+        choices: [
+          ["art", "“หนูจะวาดภาพให้ร้านนี้มีเอกลักษณ์ไม่เหมือนใคร”"],
+          ["design", "“หนูจะทำแบรนด์ใหม่ให้ ตั้งแต่โลโก้ไปจนถึงป้ายหน้าร้าน”"],
+          ["game", "“หนูจะทำให้การเดินเข้าร้านเป็นเหมือนเล่นเกมสนุก ๆ”"],
+          ["fx", "“หนูจะทำคลิปแนะนำร้านที่ดูแล้วขนลุก”"],
+          ["event", "“หนูจะจัดงานและช่วยโปรโมต ให้คนแห่กันมา”"]
+        ]
+      },
+      {
+        scene: "ด่านทดสอบ · ประตูหิน",
+        title: "ประตูหินถามว่า “เธอพร้อมฝึกอะไรทุกวัน?”",
+        story: "ประตูหินเปิดออก เมื่อเธอเลือกสิ่งที่อยากฝึกให้เก่งขึ้น",
+        choices: [
+          ["art", "วาดรูปและสังเกตโลกให้ละเอียดขึ้น"],
+          ["design", "จัดองค์ประกอบ สี และตัวอักษรให้ลงตัว"],
+          ["game", "คิดเป็นระบบ เป็นขั้นเป็นตอน"],
+          ["fx", "ทำให้ภาพเคลื่อนไหวและดูสมจริง"],
+          ["event", "พูด เล่าเรื่อง และประสานคนให้ไปทางเดียวกัน"]
+        ]
+      },
+      {
+        scene: "ฉาก 4.1 · เพื่อนร่วมทาง",
+        title: "เพื่อนร่วมทางสี่คนมีของที่ยังทำไม่ได้ เธอเลือกเป็นคนที่…",
+        story: "ประตูหินเปิดออก และเธอไม่ได้เดินต่อคนเดียวอีกแล้ว",
+        choices: [
+          ["art", "ช่วยวาดภาพให้ทุกคนเห็นตรงกัน"],
+          ["design", "ทำไกด์ให้ทุกอย่างดูลงตัวและเป็นระเบียบ"],
+          ["game", "คิดวิธีให้ทุกคนทำงานด้วยกันแล้วสนุก"],
+          ["fx", "ทำตัวอย่างสั้น ๆ ให้เห็นว่าแผนจะออกมาเป็นยังไง"],
+          ["event", "เป็นคนกลางที่ทำให้ทุกคนอยากเดินต่อไปด้วยกัน"]
+        ]
+      },
+      {
+        scene: "ฉาก 4.2 · เพื่อนเห็นไม่ตรงกัน",
+        title: "ทีมเถียงกันว่าจะไปทางไหน เธอทำอะไร?",
+        story: "กลางทางมีสองแยก ทุกคนมีเหตุผลของตัวเองและยังตัดสินใจไม่ได้",
+        choices: [
+          ["art", "วาดแผนที่ให้เห็นภาพว่าแต่ละทางไปไหนบ้าง"],
+          ["design", "ทำตารางเปรียบเทียบให้ตัดสินใจง่ายขึ้น"],
+          ["game", "ลองไปทั้งสองทางแล้วดูผลลัพธ์"],
+          ["fx", "ทำภาพจำลองให้เห็นว่าปลายทางแต่ละทางเป็นยังไง"],
+          ["event", "ฟังทุกคนก่อน แล้วหาจุดที่ทุกคนรับได้"]
+        ]
+      },
+      {
+        scene: "ฉาก 5.1 · ขึ้นเวที",
+        title: "ไฮไลต์ที่เธออยากมอบให้ทั้งเมืองคือ…",
+        story: "ฟ้ามืดลงแล้ว ไฟทั่วเมืองเริ่มติด เหลือแค่เวทีใหญ่ที่ยังว่างอยู่",
+        image: "assets/stage.png",
+        imageClass: "stage-illustration",
+        choices: [
+          ["art", "ภาพวาดขนาดยักษ์ที่คนทั้งเมืองเงยหน้ามอง"],
+          ["design", "ภาพลักษณ์ใหม่ของเมืองที่ทุกมุมมีสไตล์เดียวกัน"],
+          ["game", "เกมที่คนทั้งเมืองเข้ามาเล่นพร้อมกัน"],
+          ["fx", "โชว์ภาพเคลื่อนไหวและเอฟเฟกต์ที่ทำให้ทั้งลานตะลึง"],
+          ["event", "การแสดงสดที่ทุกคนมีส่วนร่วมได้"]
+        ]
+      },
+      {
+        scene: "ฉาก 5.2 · สีสันกลับมาแล้ว",
+        title: "เธออยากให้ผู้คนจดจำเธอว่าเป็นใคร?",
+        story: "สีค่อย ๆ กลับมาทั่วเมือง ผู้คนหันมามองเธอ—นี่คือคำตอบสุดท้ายของการเดินทาง",
+        image: "assets/เมืองที่กลับมามีสี.png",
+        imageClass: "city-illustration",
+        choices: [
+          ["art", "คนที่ให้กำเนิดตัวละครที่ทุกคนรัก"],
+          ["design", "คนที่ทำให้เมืองดูดีและมีเอกลักษณ์"],
+          ["game", "คนที่สร้างโลกให้ทุกคนได้เข้ามาเล่น"],
+          ["fx", "คนที่ทำให้สิ่งที่ดูเป็นไปไม่ได้กลายเป็นจริง"],
+          ["event", "คนที่ทำให้ทุกคนมาอยู่พร้อมหน้ากัน"]
+        ]
+      }
+    ];
+
+    const districtQuestions = {
+      art: {
+        scene: "บทที่ 3 · ย่านของเธอ · ย่านศิลป์: ตรอกจินตนาการ",
+        title: "ศิลปินสูงวัยคนหนึ่งยื่นพู่กันสีสดให้ แล้วถามว่า “เธออยากเป็นคนแบบไหนในเมืองนี้”",
+        story: "",
+        image: "assets/art.png",
+        choices: [
+          ["art", "คนที่สร้างตัวละครให้ทั้งโลกจำได้"],
+          ["art", "คนที่วาดโลกและฉากหลังให้เรื่องเล่ามีชีวิต"],
+          ["art", "คนที่เล่าเรื่องด้วยภาพหลายช่อง"],
+          ["art", "คนที่ทำให้ภาพวาดกลายเป็นสินค้าหรือของสะสม"]
+        ]
+      },
+      design: {
+        scene: "บทที่ 3 · ย่านของเธอ · ย่านดีไซน์: ถนนเอกลักษณ์",
+        title: "นักออกแบบคนหนึ่งยืนอยู่หน้าร้านที่ป้ายยังว่างเปล่า แล้วถามว่า “ถ้าได้ฝากลายเซ็นไว้ที่ไหนสักแห่งในเมืองนี้ เธออยากให้เป็นที่ไหน”",
+        story: "",
+        image: "assets/design.png",
+        choices: [
+          ["design", "ป้ายและโลโก้ที่ทุกคนเห็นทุกวัน"],
+          ["design", "หน้าจอแอปและเว็บไซต์ของเมือง"],
+          ["design", "กล่องและแพ็กเกจที่ใคร ๆ ก็อยากเก็บไว้"],
+          ["design", "โปสเตอร์ใหญ่กลางเมืองที่คนเดินผ่านแล้วต้องหันมอง"]
+        ]
+      },
+      game: {
+        scene: "บทที่ 3 · ย่านของเธอ · ย่านเกม: สนามแห่งการเล่น",
+        title: "หัวหน้าสนามเกมเดินมาหา แล้วถามว่า “เกมของเธอจะเริ่มจากอะไร”",
+        story: "",
+        image: "assets/game.png",
+        choices: [
+          ["game", "คิดกติกาและระบบให้คนเล่นแล้วติดใจ"],
+          ["game", "ออกแบบฉากและตัวละครในเกม"],
+          ["game", "สร้างโลกเสมือนที่เดินเข้าไปได้จริง"],
+          ["game", "ดูแลให้เกมไปถึงมือผู้เล่นได้"]
+        ]
+      },
+      fx: {
+        scene: "บทที่ 3 · ย่านของเธอ · ย่านภาพยนตร์: กำแพงแห่งเรื่องราว",
+        title: "ผู้กำกับลึกลับคนหนึ่งถือสคริปต์มาให้ แล้วถามว่า “เธออยากคุมฉากจากไหนของหนังเรื่องนี้”",
+        story: "",
+        image: "assets/film.png",
+        choices: [
+          ["fx", "ตัวละครขยับเหมือนมีชีวิตจริง"],
+          ["fx", "ของและตัวละครที่ปั้นขึ้นมาจากความว่างเปล่า"],
+          ["fx", "ฉากระเบิด ไฟ น้ำ ควัน ที่ทำให้คนดูตกใจ"],
+          ["fx", "การรวมทุกชิ้นภาพให้ดูเหมือนถ่ายจริงเป็นชิ้นเดียว"]
+        ]
+      },
+      event: {
+        scene: "บทที่ 3 · ย่านของเธอ · ย่านบันเทิง: เวทีแห่งตัวตน",
+        title: "พิธีกรประจำเมืองยื่นไมค์มาให้ แล้วถามว่า “บทบาทไหนที่ทำให้เธอใจเต้นที่สุด”",
+        story: "",
+        image: "assets/entertainment.png",
+        choices: [
+          ["event", "คนคิดรายการและคอนเทนต์ที่ทุกคนรอดูทุกสัปดาห์"],
+          ["event", "คนจัดงานที่ทำให้คนมาพบกันได้ประสบการณ์เดียวกัน"],
+          ["event", "คนเบื้องหลังตัวตนเสมือนและสตรีมเมอร์"],
+          ["event", "คนที่ทำให้ชุมชนแฟนคลับเติบโต"]
+        ]
+      }
+    };
+
+    const questionImages = ["assets/fire.png", "assets/items.png", "assets/crossroads.png", "assets/bridge.png", null, "assets/shop.png"];
+    const questionOrder = questions.map((question) => question.choices.map((_, index) => index));
+    const districtQuestionOrder = Object.fromEntries(
+      Object.entries(districtQuestions).map(([key, question]) => [
+        key,
+        question.choices.map((_, index) => index)
+      ])
+    );
+    const answers = Array(questions.length + 2).fill(null);
+    const interludes = {
+      2: [
+        {
+          title: "เมืองเริ่มจำสีของตัวเองได้",
+          copy: "ถนนเส้นแรกค่อย ๆ สว่างขึ้น ภาพบนกำแพงเริ่มขยับ และดวงไฟก็พาเธอมุ่งหน้าต่อไปยังที่ที่ยังต้องการความช่วยเหลือ",
+          layout: "city-memory",
+          image: "assets/เริ่มจำสี.png"
+        }
+      ],
+      5: [
+        {
+          title: "แสงจากย่านใหม่ปลุกความทรงจำ",
+          copy: "",
+          layout: "city-memory",
+          image: "assets/แสงจากย่านใหม่.png"
+        }
+      ],
+      6: [
+        {
+          title: "ประตูหินเปิดออก",
+          copy: "แสงจากประตูส่องไปข้างหน้า เธอพร้อมเดินทางต่อไปพร้อมเพื่อนใหม่",
+          layout: "city-memory",
+          image: "assets/ประตูหิน.png"
+        }
+      ],
+      8: [
+        {
+          title: "เสียงเทศกาลดังมาจากปลายถนน",
+          copy: "เพื่อนร่วมทางเดินเคียงข้างเธอ ไฟดวงเล็กทั่วเมืองเริ่มส่องประกาย เหลือเพียงเวทีสุดท้ายก่อนค่ำคืนนี้จะจบลง",
+          layout: "city-memory",
+          image: "assets/เทศกาล.png"
+        }
+      ]
+    };
+    let current = 0;
+    let interludePage = 0;
+    let isTransitioning = false;
+    let respondentNickname = "";
+
+    function getMatchedDistricts() {
+      const counts = new Map();
+      questions.slice(0, 6).forEach((question, index) => {
+        const categoryKey = question.choices[answers[index]][0];
+        const entry = counts.get(categoryKey) || { count: 0, firstIndex: index };
+        entry.count++;
+        counts.set(categoryKey, entry);
+      });
+
+      const shopCategory = questions[5].choices[answers[5]][0];
+      const rankedCategories = [...counts.entries()]
+        .sort((a, b) => b[1].count - a[1].count || a[1].firstIndex - b[1].firstIndex)
+        .map(([categoryKey]) => categoryKey);
+      const otherCategory = rankedCategories.find((categoryKey) => categoryKey !== shopCategory);
+      return [shopCategory, otherCategory]
+        .filter(Boolean)
+        .map((categoryKey) => ({
+          key: categoryKey,
+          category: categories[categoryKey],
+          question: districtQuestions[categoryKey]
+        }));
+    }
+
+    function getQuestionCount() {
+      const districtCount = answers[5] === null ? 2 : getMatchedDistricts().length;
+      return questions.length + districtCount;
+    }
+
+    function getQuestionAt(index) {
+      if (index < 6) return questions[index];
+      const matchedDistricts = getMatchedDistricts();
+      const districtIndex = index - 6;
+      if (districtIndex < matchedDistricts.length) return matchedDistricts[districtIndex].question;
+      return questions[index - matchedDistricts.length];
+    }
+
+    function getQuestionOrderAt(index) {
+      if (index < 6) return questionOrder[index];
+      const matchedDistricts = getMatchedDistricts();
+      const districtIndex = index - 6;
+      if (districtIndex < matchedDistricts.length) {
+        return districtQuestionOrder[matchedDistricts[districtIndex].key];
+      }
+      return questionOrder[index - matchedDistricts.length];
+    }
+
+    function getBaseQuestionIndex(index) {
+      if (index < 6) return index;
+      const districtCount = getMatchedDistricts().length;
+      if (index < 6 + districtCount) return null;
+      return index - districtCount;
+    }
+
+    function getInterludePages() {
+      return interludes[getBaseQuestionIndex(current)] || [];
+    }
+
+    const screens = {
+      intro: document.getElementById("intro"),
+      quiz: document.getElementById("quiz"),
+      interlude: document.getElementById("interlude"),
+      questionnaire: document.getElementById("questionnaire"),
+      result: document.getElementById("result")
+    };
+
+    function showScreen(name) {
+      Object.entries(screens).forEach(([key, element]) => {
+        element.classList.toggle("active", key === name);
+      });
+      if (name === "quiz") alignQuizArtWithChoices();
+      window.scrollTo(0, 0);
+    }
+
+    function shuffle(items) {
+      for (let i = items.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [items[i], items[j]] = [items[j], items[i]];
+      }
+    }
+
+    function alignQuizArtWithChoices() {
+      const quizArt = document.querySelector(".quiz-art");
+      const shouldAlign = quizArt.classList.contains("district-question") || quizArt.classList.contains("city-illustration");
+      if (!shouldAlign || !window.matchMedia("(min-width: 721px)").matches) return;
+      quizArt.style.removeProperty("--choices-center-offset");
+      const artBounds = quizArt.getBoundingClientRect();
+      const choicesBounds = document.getElementById("choices").getBoundingClientRect();
+      const offset = choicesBounds.top + choicesBounds.height / 2 - artBounds.top - artBounds.height / 2;
+      quizArt.style.setProperty("--choices-center-offset", `${offset}px`);
+    }
+
+    function renderQuestion() {
+      const question = getQuestionAt(current);
+      const openingQuestionIndex = current < 6 ? current : -1;
+      const isDistrictQuestion = current >= 6 && current < 6 + getMatchedDistricts().length;
+      const progressTrack = document.querySelector(".progress-track");
+      progressTrack.setAttribute("aria-valuemax", getQuestionCount());
+      progressTrack.setAttribute("aria-valuenow", current + 1);
+      document.getElementById("progress-fill").style.width = `${((current + 1) / getQuestionCount()) * 100}%`;
+      const questionImage = openingQuestionIndex >= 0 ? questionImages[openingQuestionIndex] : question.image || null;
+      const quizWrap = document.querySelector(".quiz-wrap");
+      const quizArt = document.querySelector(".quiz-art");
+      quizArt.style.removeProperty("--choices-center-offset");
+      quizWrap.classList.toggle("text-only", !questionImage);
+      quizWrap.classList.toggle("district-question", isDistrictQuestion);
+      quizWrap.classList.toggle("design-district-question", question.image === "assets/design.png");
+      quizArt.classList.toggle("show-image", Boolean(questionImage));
+      quizArt.classList.toggle("fire-question", openingQuestionIndex === 0);
+      quizArt.classList.toggle("district-question", isDistrictQuestion);
+      quizArt.classList.toggle("illustration-image", Boolean(question.image));
+      quizArt.classList.toggle("design-district-image", question.image === "assets/design.png");
+      quizArt.classList.toggle("stage-illustration", question.imageClass === "stage-illustration");
+      quizArt.classList.toggle("city-illustration", question.imageClass === "city-illustration");
+      quizArt.classList.toggle("items-image", openingQuestionIndex === 1);
+      quizArt.classList.toggle("crossroads-image", openingQuestionIndex === 2);
+      quizArt.classList.toggle("bridge-image", openingQuestionIndex === 3);
+      quizArt.classList.toggle("shop-image", openingQuestionIndex === 5);
+      if (questionImage) document.getElementById("question-image").src = questionImage;
+      document.getElementById("scene-label").textContent = question.scene.split(" · ").slice(1).join(" · ");
+      document.getElementById("question-title").textContent = question.title;
+      const storyCopy = document.getElementById("story-copy");
+      storyCopy.textContent = question.story;
+      storyCopy.hidden = !question.story;
+
+      const choices = document.getElementById("choices");
+      choices.replaceChildren();
+      getQuestionOrderAt(current).forEach((choiceIndex) => {
+        const [, label] = question.choices[choiceIndex];
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "choice";
+        button.textContent = label;
+        button.addEventListener("click", () => {
+          if (isTransitioning) return;
+          isTransitioning = true;
+          answers[current] = choiceIndex;
+          answers.fill(null, current + 1);
+          choices.querySelectorAll("button").forEach((choice) => { choice.disabled = true; });
+          button.classList.add("is-selected");
+          window.setTimeout(() => {
+            isTransitioning = false;
+            if (current === getQuestionCount() - 1) {
+              showScreen("questionnaire");
+            } else if (interludes[getBaseQuestionIndex(current)]) {
+              interludePage = 0;
+              renderInterlude();
+              showScreen("interlude");
+            } else {
+              current++;
+              renderQuestion();
+            }
+          }, 220);
+        });
+        choices.append(button);
+      });
+
+      if (screens.quiz.classList.contains("active")) alignQuizArtWithChoices();
+
+      document.getElementById("back-button").disabled = current === 0;
+      document.getElementById("back-button").style.visibility = current === 0 ? "hidden" : "visible";
+    }
+
+    function renderInterlude() {
+      const interlude = getInterludePages()[interludePage];
+      document.querySelector(".story-art").classList.add("show-fire");
+      const isCityMemory = interlude.layout === "city-memory";
+      screens.interlude.classList.toggle("city-memory", isCityMemory);
+      document.getElementById("interlude-image").src = interlude.image || "assets/fire.png";
+      document.getElementById("story-continue-label").textContent = isCityMemory ? "เดินทางต่อ..." : "เดินทางต่อ";
+      document.getElementById("story-title").textContent = interlude.title;
+      document.getElementById("interlude-copy").textContent = current === 5 && interludePage === 0
+        ? `คำตอบก่อนหน้าพาเธอเข้าสู่${getMatchedDistricts().map(({ category }) => category.district).join(" และ ")} ที่นี่ผู้คนกำลังรอให้เธอช่วยปลุกความทรงจำดี ๆ ของเมือง`
+        : interlude.copy;
+    }
+
+    function getJourneyCategories() {
+      const startingPath = questions[5].choices[answers[5]][0];
+      const lastQuestionIndex = getQuestionCount() - 1;
+      const endingPath = getQuestionAt(lastQuestionIndex).choices[answers[lastQuestionIndex]][0];
+      return {
+        startingCategory: categories[startingPath],
+        endingCategory: categories[endingPath],
+        isMixedPath: startingPath !== endingPath
+      };
+    }
+
+    function showResults() {
+      const { startingCategory, endingCategory, isMixedPath } = getJourneyCategories();
+      document.getElementById("result-title").textContent = isMixedPath
+        ? "นักสร้างสรรค์สายผสม"
+        : endingCategory.name;
+      const respondentGreeting = document.getElementById("respondent-greeting");
+      respondentGreeting.hidden = !respondentNickname;
+      respondentGreeting.textContent = respondentNickname ? `ขอบคุณที่ร่วมตอบแบบสอบถามนะ ${respondentNickname}` : "";
+      document.getElementById("result-summary").textContent = isMixedPath
+        ? `เธอออกเดินทางจาก${startingCategory.district} แล้วเลือกมุ่งหน้าไปทาง${endingCategory.name} เส้นทางของเธอจึงมีทั้งพลังของ${startingCategory.name}และ${endingCategory.name} ไม่มีสูตรสำเร็จ นี่คือแบบของเธอ`
+        : `${endingCategory.description} ในคืนที่เมืองเกือบไร้สี เธอใช้สิ่งที่เป็นตัวเองพาทุกคนกลับมามีรอยยิ้ม`;
+      const resultCharacters = document.getElementById("result-characters");
+      const characterCategories = isMixedPath
+        ? [startingCategory, endingCategory]
+        : [endingCategory];
+      document.getElementById("result-program-codes").textContent = characterCategories
+        .map((category) => category.code)
+        .join(" · ");
+      resultCharacters.dataset.count = String(characterCategories.length);
+      resultCharacters.replaceChildren();
+      characterCategories.forEach((category) => {
+        const character = document.createElement("figure");
+        character.className = "result-character";
+        const image = document.createElement("img");
+        image.src = category.image;
+        image.alt = category.name;
+        image.decoding = "async";
+        character.append(image);
+        resultCharacters.append(character);
+      });
+
+      const districtResult = document.getElementById("district-result");
+      districtResult.replaceChildren();
+      const districtTitle = document.createElement("strong");
+      districtTitle.textContent = startingCategory.district;
+      const districtDescription = document.createElement("span");
+      districtDescription.textContent = startingCategory.description;
+      districtResult.append(districtTitle, districtDescription);
+
+      const careerList = document.getElementById("career-list");
+      careerList.replaceChildren();
+      const careers = [...new Set([
+        ...startingCategory.careers,
+        ...(isMixedPath ? endingCategory.careers : [])
+      ])];
+      careers.forEach((career) => {
+        const item = document.createElement("li");
+        item.textContent = career;
+        careerList.append(item);
+      });
+      showScreen("result");
+    }
+
+    function drawWrappedCanvasText(context, text, x, y, maxWidth, lineHeight) {
+      const segments = typeof Intl.Segmenter === "function"
+        ? Array.from(new Intl.Segmenter("th", { granularity: "word" }).segment(text), ({ segment }) => segment)
+        : Array.from(text);
+      const lines = [];
+      let line = "";
+
+      segments.forEach((segment) => {
+        const candidate = line + segment;
+        if (line && context.measureText(candidate).width > maxWidth) {
+          lines.push(line.trim());
+          line = segment.trimStart();
+        } else {
+          line = candidate;
+        }
+      });
+      if (line) lines.push(line.trim());
+      lines.forEach((lineText, index) => context.fillText(lineText, x, y + index * lineHeight));
+      return y + lines.length * lineHeight;
+    }
+
+    function drawCanvasCard(context, x, y, width, height, radius) {
+      context.beginPath();
+      context.moveTo(x + radius, y);
+      context.lineTo(x + width - radius, y);
+      context.quadraticCurveTo(x + width, y, x + width, y + radius);
+      context.lineTo(x + width, y + height - radius);
+      context.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      context.lineTo(x + radius, y + height);
+      context.quadraticCurveTo(x, y + height, x, y + height - radius);
+      context.lineTo(x, y + radius);
+      context.quadraticCurveTo(x, y, x + radius, y);
+      context.closePath();
+      context.fill();
+    }
+
+    function saveResultImage() {
+      const status = document.getElementById("result-image-status");
+      status.textContent = "";
+      const characterImages = Array.from(document.querySelectorAll("#result-characters img"));
+      if (characterImages.some((image) => !image.complete || image.naturalWidth === 0)) {
+        status.textContent = "ภาพคาแรคเตอร์ยังโหลดไม่เสร็จ กรุณากดบันทึกภาพอีกครั้ง";
+        return;
+      }
+
+      const canvas = document.createElement("canvas");
+      canvas.width = 1080;
+      canvas.height = 1920;
+      const context = canvas.getContext("2d");
+      if (!context || typeof canvas.toDataURL !== "function") {
+        status.textContent = "เบราว์เซอร์นี้ไม่รองรับการบันทึกรูปภาพ";
+        return;
+      }
+
+      const { startingCategory, endingCategory, isMixedPath } = getJourneyCategories();
+      const left = 64;
+      const textWidth = 952;
+      let y = 112;
+
+      context.fillStyle = "#f5f5f2";
+      context.fillRect(0, 0, canvas.width, canvas.height);
+      context.fillStyle = "#777772";
+      context.font = "700 26px Tahoma, sans-serif";
+      context.fillText("ในคืนที่สีสันกลับคืนมา เธอคือ…", left, y);
+
+      const greeting = document.getElementById("respondent-greeting");
+      if (!greeting.hidden && greeting.textContent) {
+        context.font = "24px Tahoma, sans-serif";
+        y = drawWrappedCanvasText(context, greeting.textContent, left, y + 52, textWidth, 36);
+      }
+
+      context.fillStyle = "#171717";
+      context.font = "600 82px Tahoma, sans-serif";
+      y = drawWrappedCanvasText(context, document.getElementById("result-title").textContent, left, y + 94, textWidth, 96);
+      context.fillStyle = "#777772";
+      context.font = "700 32px Tahoma, sans-serif";
+      context.fillText(
+        (isMixedPath ? [startingCategory, endingCategory] : [endingCategory]).map((category) => category.code).join(" · "),
+        left,
+        y + 12
+      );
+      y += 54;
+
+      context.fillStyle = "#5f5f59";
+      context.font = "34px Tahoma, sans-serif";
+      y = drawWrappedCanvasText(context, document.getElementById("result-summary").textContent, left, y + 12, textWidth, 48);
+      y += 28;
+
+      const avatarHeight = characterImages.length === 1 ? 620 : 520;
+      const avatarGap = 20;
+      const avatarWidths = characterImages.map((image) => image.naturalWidth * avatarHeight / image.naturalHeight);
+      const avatarRowWidth = avatarWidths.reduce((total, width) => total + width, 0) + (characterImages.length - 1) * avatarGap;
+      let avatarX = (canvas.width - avatarRowWidth) / 2;
+      characterImages.forEach((image, index) => {
+        context.drawImage(image, avatarX, y, avatarWidths[index], avatarHeight);
+        avatarX += avatarWidths[index] + avatarGap;
+      });
+      y += avatarHeight + 88;
+
+      context.fillStyle = "#171717";
+      context.font = "700 36px Tahoma, sans-serif";
+      context.fillText("ย่านที่ดวงไฟพาไป", left, y);
+      y += 22;
+      context.fillStyle = "#ecece7";
+      const districtText = isMixedPath
+        ? `${startingCategory.district} → ${endingCategory.district}`
+        : startingCategory.district;
+      const districtDescription = startingCategory.description;
+      drawCanvasCard(context, left, y + 20, textWidth, 210, 22);
+      context.fillStyle = "#171717";
+      context.font = "700 30px Tahoma, sans-serif";
+      drawWrappedCanvasText(context, districtText, left + 28, y + 70, textWidth - 56, 38);
+      context.fillStyle = "#5f5f59";
+      context.font = "26px Tahoma, sans-serif";
+      drawWrappedCanvasText(context, districtDescription, left + 28, y + 128, textWidth - 56, 40);
+      y += 300;
+
+      context.fillStyle = "#171717";
+      context.font = "700 36px Tahoma, sans-serif";
+      context.fillText("อาชีพที่อาจใช่สำหรับเธอ", left, y);
+      const careers = Array.from(document.querySelectorAll("#career-list li"), (item) => item.textContent);
+      context.font = "26px Tahoma, sans-serif";
+      let tagX = left;
+      let tagY = y + 28;
+      const tagHeight = 58;
+      careers.forEach((career) => {
+        const tagWidth = Math.min(textWidth, context.measureText(career).width + 36);
+        if (tagX > left && tagX + tagWidth > left + textWidth) {
+          tagX = left;
+          tagY += tagHeight + 14;
+        }
+        context.fillStyle = "#ecece7";
+        drawCanvasCard(context, tagX, tagY, tagWidth, tagHeight, 29);
+        context.fillStyle = "#171717";
+        context.fillText(career, tagX + 18, tagY + 38);
+        tagX += tagWidth + 12;
+      });
+
+      tagY += tagHeight + 44;
+      context.fillStyle = "#777772";
+      context.font = "24px Tahoma, sans-serif";
+      drawWrappedCanvasText(context, "ไม่มีเส้นทางไหนผิด ลองสำรวจสิ่งที่ทำให้เธออยากสร้างต่อไป", left, tagY, textWidth, 36);
+
+      try {
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "imagine-city-result.png";
+        document.body.append(link);
+        link.click();
+        link.remove();
+      } catch (error) {
+        status.textContent = `ดาวน์โหลดรูปภาพไม่สำเร็จ: ${error.message}`;
+        console.error("Could not export the result image.", error);
+      }
+    }
+
+    const interestForm = document.getElementById("interest-form");
+    const nicknameInput = document.getElementById("nickname");
+    const factorInputs = [...interestForm.querySelectorAll('input[name="decisionFactors"]')];
+    const creativeWorkInputs = [...interestForm.querySelectorAll('input[name="creativeWorks"]')];
+    const neverWorkedInput = creativeWorkInputs.find((input) => input.value === "ยังไม่เคยเลย");
+
+    function updateFactorSelection() {
+      const selectedCount = factorInputs.filter((input) => input.checked).length;
+      document.getElementById("factor-count").textContent = `เลือกแล้ว ${selectedCount}/2`;
+      factorInputs.forEach((input) => {
+        input.disabled = selectedCount === 2 && !input.checked;
+        input.closest(".survey-option").classList.toggle("is-disabled", input.disabled);
+      });
+      factorInputs[0].setCustomValidity(selectedCount === 2 ? "" : "กรุณาเลือกปัจจัยให้ครบ 2 ข้อ");
+    }
+
+    function updateCreativeWorkValidity() {
+      const hasSelection = creativeWorkInputs.some((input) => input.checked);
+      creativeWorkInputs[0].setCustomValidity(hasSelection ? "" : "กรุณาเลือกอย่างน้อย 1 ข้อ");
+    }
+
+    function resetInterestForm() {
+      interestForm.reset();
+      nicknameInput.setCustomValidity("");
+      updateFactorSelection();
+      updateCreativeWorkValidity();
+    }
+
+    factorInputs.forEach((input) => input.addEventListener("change", updateFactorSelection));
+    creativeWorkInputs.forEach((input) => {
+      input.addEventListener("change", () => {
+        if (input === neverWorkedInput && input.checked) {
+          creativeWorkInputs.forEach((otherInput) => {
+            if (otherInput !== neverWorkedInput) otherInput.checked = false;
+          });
+        } else if (input.checked && neverWorkedInput) {
+          neverWorkedInput.checked = false;
+        }
+        updateCreativeWorkValidity();
+      });
+    });
+    updateFactorSelection();
+    updateCreativeWorkValidity();
+    nicknameInput.addEventListener("input", () => nicknameInput.setCustomValidity(""));
+
+    interestForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      nicknameInput.value = nicknameInput.value.trim();
+      if (!nicknameInput.value) {
+        nicknameInput.setCustomValidity("กรุณากรอกชื่อเล่น");
+        nicknameInput.reportValidity();
+        return;
+      }
+      nicknameInput.setCustomValidity("");
+      respondentNickname = nicknameInput.value;
+      resetInterestForm();
+      showResults();
+    });
+
+    document.getElementById("skip-questionnaire").addEventListener("click", () => {
+      respondentNickname = "";
+      resetInterestForm();
+      showResults();
+    });
+
+    document.getElementById("start-button").addEventListener("click", () => {
+      questionOrder.forEach((order) => shuffle(order));
+      Object.values(districtQuestionOrder).forEach((order) => shuffle(order));
+      current = 0;
+      interludePage = 0;
+      isTransitioning = false;
+      renderQuestion();
+      showScreen("quiz");
+    });
+
+    document.getElementById("back-button").addEventListener("click", () => {
+      if (current > 0 && !isTransitioning) {
+        current--;
+        renderQuestion();
+      }
+    });
+
+    function continueInterlude() {
+      const pages = getInterludePages();
+      if (interludePage < pages.length - 1) {
+        interludePage++;
+        renderInterlude();
+        return;
+      }
+      interludePage = 0;
+      current++;
+      renderQuestion();
+      showScreen("quiz");
+    }
+
+    document.getElementById("story-continue").addEventListener("click", continueInterlude);
+    screens.interlude.addEventListener("click", (event) => {
+      if (!screens.interlude.classList.contains("city-memory") || event.target.closest("#story-continue")) return;
+      continueInterlude();
+    });
+
+    document.getElementById("save-result-image").addEventListener("click", saveResultImage);
+
+    document.getElementById("restart-button").addEventListener("click", () => {
+      answers.fill(null);
+      respondentNickname = "";
+      resetInterestForm();
+      questionOrder.forEach((order) => shuffle(order));
+      Object.values(districtQuestionOrder).forEach((order) => shuffle(order));
+      current = 0;
+      interludePage = 0;
+      isTransitioning = false;
+      renderQuestion();
+      showScreen("intro");
+    });
+  </script>
+</body>
+</html>
